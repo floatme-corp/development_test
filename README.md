@@ -50,7 +50,7 @@ Review the below examples for sample input and output.
 
 ### Example #1
 
-For the following `input.txt` file:
+For the following `input1.txt` file:
 ```
 1
 A 1 2
@@ -72,7 +72,7 @@ Finished at: t=7 minutes
 
 ### Example #2
 
-For the following `input.txt` file:
+For the following `input2.txt` file:
 ```
 2
 A 1 5
@@ -102,7 +102,7 @@ Finished at: t=13 minutes
 
 ### Example #3
 
-For the following `input.txt` file:
+For the following `input3.txt` file:
 ```
 2
 A 1 2
@@ -119,7 +119,7 @@ This example illustrates the requirement that departing customers are not counte
 
 ### Example #4
 
-For the following `input.txt` file:
+For the following `input4.txt` file:
 ```
 2
 A 1 2
@@ -136,7 +136,7 @@ This example illustrates the requirement that customers with fewer items choose 
 
 ### Example #5
 
-For the following `input.txt` file:
+For the following `input5.txt` file:
 ```
 2
 A 1 3
