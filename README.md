@@ -1,8 +1,15 @@
+# FloatMe Development Test
+
 ## Quick Read
+
+Use your language of choice.  We use Go (backend), Typescript (frontend) and Dart (mobile) internally currently.
 
 Please clone this repository using [git](http://git-scm.com/) and complete the problem described below in that repository. We prefer that you do not fork this repository; just clone it and commit your work to your local copy of the repository. If you are not familiar with git, you can find several guides online.
 
-The .gitignore by default will ignore this directory, but if you have an additional IDE files or folders created please add them to your `.gitignore` or specifically do not add them into the git repo. Please utilize [go modules](https://golang.org/ref/mod). If you are not familiar with `go modules`, you can find several guides online.
+The .gitignore by default will ignore this directory, but if you have an additional IDE files or folders created please add them to your `.gitignore` or specifically do not add them into the git repo. Please utilize the package manager tool for your language of choice:
+
+- Go - [go modules](https://golang.org/ref/mod)
+- Javascript/Typescript - [npm](https://www.npmjs.com/)
 
 When you start, you **must create** the file called `started` that contains the current time at which you started. Please use **RFC-3339 format with seconds level precision**. Then commit this file only with the commit message of `Starting Challenge`
 
@@ -23,8 +30,8 @@ We will also be considering your overall approach to the problem and your progra
 The following should be available in your resulting solution zip file:
 
 1. Source Code
-  * The source code should be in Go, using version 1.16 (or any minor revision thereafter)
-  * Unit tests
+    1. Latest version of your language of choice (i.e., Go 1.16.x, Javascript ES7/8, Typescript 4.2.x)
+    1. Unit tests
 1. Any other supporting code or other binaries that you used to develop the solution (even if it is not required to run the solution). If a resource is easily accessible on the web you can just provide a link to it rather than including the files.
 
 ## Problem Details
@@ -35,8 +42,8 @@ The following should be available in your resulting solution zip file:
 1. Regular registers take one minute to process each customer's item. The register staffed by the cashier in training takes two minutes for each item. So a customer with `n` items at a regular register takes `n` minutes to check out. However, if the customer ends up at the last register, it will take `2n` minutes to check out.
 1. The simulation starts at `t=0`. At that time all registers are empty (i.e. no customers are in line).
 1. Two types of customers arrive at the registers:
-  * Customer Type A always chooses the register with the shortest line (least number of customers in line). If two or more registers have the shortest line, Customer Type A will choose the register with the lowest register number (e.g. register #1 would be chosen over register #3).
-  * Customer Type B looks at the last customer in each line, and always chooses to be behind the customer with the fewest number of items left to check out, regardless of how many other customers are in the line or how many items they have. Customer Type B will always choose an empty line before a line with any customers in it.
+    1. Customer Type A always chooses the register with the shortest line (least number of customers in line). If two or more registers have the shortest line, Customer Type A will choose the register with the lowest register number (e.g. register #1 would be chosen over register #3).
+    1. Customer Type B looks at the last customer in each line, and always chooses to be behind the customer with the fewest number of items left to check out, regardless of how many other customers are in the line or how many items they have. Customer Type B will always choose an empty line before a line with any customers in it.
 1. Customers just finishing checking out do not count as being in line (for either kind of customer).
 1. If two or more customers arrive at the same time, those with fewer items choose registers before those with more items. If the customers have the same number of items, then type A customers choose before type B customers.
 
@@ -51,21 +58,25 @@ Review the below examples for sample input and output.
 ### Example #1
 
 For the following `input1.txt` file:
-```
+
+```bash
 1
 A 1 2
 A 2 1
 ```
+
 The following highlights occur:
-* t=0 : Simulation starts with one register, which is a training register.
-* t=1 : Customer #1 (type A) arrives with 2 items and goes to register #1, which starts servicing him.
-* t=2 : Customer #2 (type A) arrives with 1 item and goes to register #1, behind Customer #1.
-* t=3 : (Customer #1 now has one item left, since the first item took two minutes).
-* t=5 : Customer #1 leaves and register #1 starts servicing Customer #2.
-* t=7 : Customer #2 leaves.
+
+- t=0 : Simulation starts with one register, which is a training register.
+- t=1 : Customer #1 (type A) arrives with 2 items and goes to register #1, which starts servicing him.
+- t=2 : Customer #2 (type A) arrives with 1 item and goes to register #1, behind Customer #1.
+- t=3 : (Customer #1 now has one item left, since the first item took two minutes).
+- t=5 : Customer #1 leaves and register #1 starts servicing Customer #2.
+- t=7 : Customer #2 leaves.
 
 Here is the expected command output:
-```
+
+```bash
 $ go run main.go
 Finished at: t=7 minutes
 ```
@@ -73,7 +84,8 @@ Finished at: t=7 minutes
 ### Example #2
 
 For the following `input2.txt` file:
-```
+
+```bash
 2
 A 1 5
 B 2 1
@@ -81,21 +93,24 @@ A 3 5
 B 5 3
 A 8 2
 ```
+
 The following highlights occur:
-* t=0 : Simulation starts with two registers; #2 is a training register.
-* t=1 : Customer #1 (type A) arrives with 5 items and goes to register #1, which starts servicing him.
-* t=2 : Customer #2 (type B) arrives with 1 item and goes to register #2 which starts servicing her.
-* t=3 : Customer #3 (type A) arrives with 5 items. Since he is type A, he goes to register #1 (lowest number of two with equal number of customers), behind Customer #1.
-* t=4 : Customer #2 leaves from register #2 (which took two minutes). (At this point, register #1 has 7 items total: 2 for Customer #1 and all 5 for Customer #3.)
-* t=5 : Customer #4 (type B) arrives with 3 items. Since register #1 has customers with 6 items, and register #2 is empty, she goes to register #2 which starts servicing her.
-* t=6 : Customer #1 leaves and register #1 starts servicing Customer #3.
-* t=8 : Customer #5 (type A) arrives with 2 items. Since both registers have one person, she goes to register #1 behind Customer #3.
-* t=11 : Customer #3 leaves and register #1 starts servicing Customer #5.
-* t=11 : Customer #4 leaves from register #2.
-* t=13 : Customer #5 leaves from register #1.
+
+- t=0 : Simulation starts with two registers; #2 is a training register.
+- t=1 : Customer #1 (type A) arrives with 5 items and goes to register #1, which starts servicing him.
+- t=2 : Customer #2 (type B) arrives with 1 item and goes to register #2 which starts servicing her.
+- t=3 : Customer #3 (type A) arrives with 5 items. Since he is type A, he goes to register #1 (lowest number of two with equal number of customers), behind Customer #1.
+- t=4 : Customer #2 leaves from register #2 (which took two minutes). (At this point, register #1 has 7 items total: 2 for Customer #1 and all 5 for Customer #3.)
+- t=5 : Customer #4 (type B) arrives with 3 items. Since register #1 has customers with 6 items, and register #2 is empty, she goes to register #2 which starts servicing her.
+- t=6 : Customer #1 leaves and register #1 starts servicing Customer #3.
+- t=8 : Customer #5 (type A) arrives with 2 items. Since both registers have one person, she goes to register #1 behind Customer #3.
+- t=11 : Customer #3 leaves and register #1 starts servicing Customer #5.
+- t=11 : Customer #4 leaves from register #2.
+- t=13 : Customer #5 leaves from register #1.
 
 Here is the expected command output:
-```
+
+```bash
 $ go run main.go
 Finished at: t=13 minutes
 ```
@@ -103,41 +118,50 @@ Finished at: t=13 minutes
 ### Example #3
 
 For the following `input3.txt` file:
-```
+
+```bash
 2
 A 1 2
 A 1 2
 A 2 1
 A 3 2
 ```
+
 Here is the expected command output:
-```
+
+```bash
 $ go run main.go
 Finished at: t=6 minutes
 ```
+
 This example illustrates the requirement that departing customers are not counted in line.
 
 ### Example #4
 
 For the following `input4.txt` file:
-```
+
+```bash
 2
 A 1 2
 A 1 3
 A 2 1
 A 2 1
 ```
+
 Here is the expected command output:
-```
+
+```bash
 $ go run main.go
 Finished at: t=9 minutes
 ```
+
 This example illustrates the requirement that customers with fewer items choose lines sooner.
 
 ### Example #5
 
 For the following `input5.txt` file:
-```
+
+```bash
 2
 A 1 3
 A 1 5
@@ -145,9 +169,12 @@ A 3 1
 B 4 1
 A 4 1
 ```
+
 Here is the expected command output:
-```
+
+```bash
 $ go run main.go
 Finished at: t=11 minutes
 ```
+
 This example illustrates the requirement that customers of type A choose before customers of type B.
